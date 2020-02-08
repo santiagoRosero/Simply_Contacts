@@ -39,6 +39,9 @@ public class Student {
 	/**The birth date of this student.*/
 	private LocalDate birthdate;
 	
+	/**The email of this student.*/
+	private String email;
+	
 	//Relations
 	/**Represents the courses this student is enrolled in.*/
 	private List<Course> courses;
@@ -48,15 +51,16 @@ public class Student {
 	/**
 	 * Constructor method. Initializes an instance of class Student given the information. This information may be empty, or non existance.
 	 * @param n The name of the student.
-	 * @param a The address of the student.
 	 * @param p The phone number of the student.
+	 * @param e the email
+	 * @param b A String representation of the student's birth date.
+	 * @param a The address of the student.
 	 * @param c The code of the student.
 	 * @param s The semester the student is in.
 	 * @param cr The career the student is in.
 	 * @param pc The URL to the student's picture.
-	 * @param b A String representation of the student's birthdate.
 	 */
-	public Student(String n, String a, String p, String c, int s, String cr, String pc, String b) {
+	public Student(String n, String p, String e, String b, String a, String c, int s, String cr, String pc) {
 		if(n == null)
 			name = "";
 		else
@@ -89,6 +93,10 @@ public class Student {
 			birthdate = null;
 		else
 			calculateBirthdate(b);
+		if(e.isEmpty())
+			setEmail("");
+		else
+			setEmail(e);
 	}
 	
 	/**
@@ -206,5 +214,13 @@ public class Student {
 			r += c.getCredits();
 		}
 		return r;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
