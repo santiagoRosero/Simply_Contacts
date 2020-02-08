@@ -60,7 +60,7 @@ public class Student {
 	 * @param cr The career the student is in.
 	 * @param pc The URL to the student's picture.
 	 */
-	public Student(String n, String p, String e, String b, String a, String c, int s, String cr, String pc) {
+	public Student(String n, String p, String e, String b, String a, String c, String s, String cr, String pc) {
 		if(n == null)
 			name = "";
 		else
@@ -77,10 +77,10 @@ public class Student {
 			code = "";
 		else
 			code = c;
-		if(s <= 0)
+		if(s.isEmpty())
 			semester = 0;
 		else
-			semester = s;
+			semester = Integer.parseInt(s);
 		if(cr == null)
 			career = cr;
 		else
@@ -104,7 +104,7 @@ public class Student {
 	 * @param b A String representation of the birth date of this student in the format "DD/MM/YYYY"
 	 */
 	private void calculateBirthdate(String b) {
-		String[] parts = b.split("/");
+		String[] parts = b.split("-");
 		int days = Integer.parseInt(parts[0]);
 		int months = Integer.parseInt(parts[1]);
 		int year = Integer.parseInt(parts[2]);
@@ -117,7 +117,13 @@ public class Student {
 			age = 0;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber + ", code=" + code
+				+ ", semester=" + semester + ", age=" + age + ", career=" + career + ", picture=" + picture
+				+ ", birthdate=" + birthdate + ", email=" + email + ", courses=" + courses + "]";
+	}
+
 	/**Returns the given name of this student.
 	 * @return The value of the field name. May be an empty field, but never null.
 	 */
