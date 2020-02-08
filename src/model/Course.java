@@ -18,8 +18,56 @@ public class Course {
 	 * @return The value of the field credits.
 	 */
 	
+	public Course (int NRC, String name, String description) {
+		
+		this.NRC = NRC;
+		this.name  = name;
+		this.description = description;
+		
+	}
 	
-	
+	public int getNRC() {
+		return NRC;
+	}
+
+
+
+	public void setNRC(int nRC) {
+		NRC = nRC;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+	public void setCredits(int credits) {
+		this.credits = credits;
+	}
+
+
+
 	public int getCredits() {
 		return credits;
 	}
