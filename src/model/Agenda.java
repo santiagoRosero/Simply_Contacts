@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Agenda {
 
 	public static final String ContactsDataBase = "./data/StudentsTest.csv";
-	public static final String CoursesDataBase = "./data/TestCourses.txt";
+	public static final String CoursesDataBase = "./data/CoursesTest.csv";
 	
 	private ArrayList<Student> contacts;	
 	private ArrayList<Course> courses;
@@ -16,7 +16,7 @@ public class Agenda {
 		contacts = new ArrayList<Student>();
 		courses = new ArrayList<Course>();
 		readContactDatabase();
-//		readCoursesDatabase();
+		readCoursesDatabase();
 	}
 	
 	private void readContactDatabase() throws Exception{
@@ -44,21 +44,28 @@ public class Agenda {
 	
 	private void readCoursesDatabase() throws Exception{
 		
-		FileReader reader = new FileReader(new File(ContactsDataBase));
+		FileReader reader = new FileReader(new File(CoursesDataBase));
 		BufferedReader br = new BufferedReader(reader);
 		
 		String line = br.readLine();
 		
 		while((line = br.readLine()) != null) {
 			
+			String[] data = line.split(",");
 			
+			Course course = new Course(data[0],data[1],data[2],data[3]);
+			courses.add(course);
 			
 		}
 		br.close();
 		
+		for(Course c : courses) {
+			System.out.println(c.toString());
+		}
 	}
 	
 	public static void main (String[] args) throws Exception {
+		@SuppressWarnings("unused")
 		Agenda agenda = new Agenda();
 	}
 	

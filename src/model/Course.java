@@ -18,14 +18,31 @@ public class Course {
 	 * @return The value of the field credits.
 	 */
 	
-	public Course (int NRC, String name, String description) {
+	public Course (String NRC, String name, String credits, String description) {
 		
-		this.NRC = NRC;
+		if(NRC.isEmpty())
+			this.NRC = 0;
+		else
+			this.NRC = Integer.parseInt(NRC);
+		
 		this.name  = name;
+		
+		if(credits.isEmpty())
+			this.credits = 0;
+		else
+			this.credits = Integer.parseInt(credits);
+		
 		this.description = description;
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "Course [credits=" + credits + ", NRC=" + NRC + ", name=" + name + ", description=" + description + "]";
+	}
+
+
+
 	public int getNRC() {
 		return NRC;
 	}
