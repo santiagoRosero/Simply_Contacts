@@ -1,0 +1,4 @@
+nrc;name;description;
+1092;ElectroMagnetismo;triana es muy pro
+0912;Proyecto Integrador; bla bla
+8721;Modelado de sistemas de informacion; :v
