@@ -86,17 +86,17 @@ public class Student {
 		else
 			career = cr;
 		if(pc == null)
-			picture = ""; //TODO Add link to default PP
+			picture = "https://www.sackettwaconia.com/wp-content/uploads/default-profile.png";
 		else
 			picture = pc;
 		if(b == null)
 			birthdate = null;
 		else
 			calculateBirthdate(b);
-		if(e.isEmpty())
-			setEmail("");
+		if(e==null)
+			email = "";
 		else
-			setEmail(e);
+			email = e;
 	}
 	
 	/**
@@ -222,11 +222,11 @@ public class Student {
 		return r;
 	}
 
+	/**
+	 * Returns the email this student has registered. 
+	 * @return The value of field email. If this value was not given, an empty string will be used instead.
+	 */
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 }
