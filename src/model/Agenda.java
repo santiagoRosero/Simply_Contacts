@@ -19,6 +19,8 @@ public class Agenda {
 		courses = new ArrayList<Course>();
 		readCoursesDatabase();
 		readContactDatabase();
+		System.out.println(assignedCoursesAverage());
+		System.out.println(assignedCreditsAverage());
 	}
 	
 	private void readContactDatabase() throws Exception{
@@ -151,6 +153,35 @@ public class Agenda {
 		}else {
 			throw new ContactException(ContactException.search);
 		}
+	}
+	
+
+	public int assignedCoursesAverage() {
+		
+		int count = 0;
+		
+		for(Student student : contacts)
+			count += student.getCourses().size();
+		
+		return (count / contacts.size());		
+	}
+	
+	public int assignedCreditsAverage() {
+		
+		int count = 0;
+		
+		for(Student student : contacts)
+			count += student.creditsNumber();
+		
+		return (count / contacts.size());		
+	}
+
+	public void mostAssignedCourse() {
+	// sort filter		
+	}
+	
+	public void lessAssignedCourse() {
+		// sort filter
 	}
 	
 	public static void main (String[] args) throws Exception {
