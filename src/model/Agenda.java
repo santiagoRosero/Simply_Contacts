@@ -19,6 +19,8 @@ public class Agenda {
 		courses = new ArrayList<Course>();
 		readCoursesDatabase();
 		readContactDatabase();
+		System.out.println(assignedCoursesAverage());
+		System.out.println(assignedCreditsAverage());
 	}
 	
 	private void readContactDatabase() throws Exception{
@@ -152,350 +154,78 @@ public class Agenda {
 			throw new ContactException(ContactException.search);
 		}
 	}
+
+	public Course searchCourseName(String n)throws Exception {
+		Course find=null;
+		for(int i=0; i<courses.size(); i++) {
+			if(n.equals(courses.get(i).getName())) {
+				find=courses.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new Exception("this course doesn't exist in the program");
+		}
+	}
 	
-	public static void main (String[] args) throws Exception {
-		@SuppressWarnings("unused")
-		Agenda agenda = new Agenda();
+	@SuppressWarnings("unlikely-arg-type")
+	public Course searchCourseNrc(String nrc) throws Exception {
+		Course find=null;
+		for(int i=0; i<courses.size(); i++) {
+			if(nrc.equals(courses.get(i).getNRC())) {
+				find=courses.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new Exception("The course with this NRC doesn't exist in the program");
+		}
+	}
+	
+	@SuppressWarnings({ "unlikely-arg-type"})
+	public ArrayList<Course> searchCourseCredits(String c) throws Exception {
+		ArrayList<Course> find=new ArrayList<Course>();
+		for(int i=0; i<courses.size(); i++) {
+			if(c.equals(courses.get(i).getCredits())) {
+				find.add(courses.get(i));
+			}
+		}
+		if(find.isEmpty()) {
+			return find;
+		}else {
+			throw new Exception("Doesn't exist courses with this number of credits");
+		}
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public int assignedCoursesAverage() {
+		
+		int count = 0;
+		
+		for(Student student : contacts)
+			count += student.getCourses().size();
+		
+		return (count / contacts.size());		
+	}
+	
+	public int assignedCreditsAverage() {
+		
+		int count = 0;
+		
+		for(Student student : contacts)
+			count += student.creditsNumber();
+		
+		return (count / contacts.size());		
+	}
 
-
+	public void mostAssignedCourse() {
+	// sort filter		
+	}
+	
+	public void lessAssignedCourse() {
+		// sort filter
+	}
 	
 	/**
 	 * Transforms every contact and course stored in the program to a String and outputs their information to a external persistent database.
@@ -517,5 +247,10 @@ public class Agenda {
 		pw = new PrintWriter(new File(CoursesDataBase));
 		pw.write(crs);
 		pw.close();
+	}
+	
+	public static void main (String[] args) throws Exception {
+		@SuppressWarnings("unused")
+		Agenda agenda = new Agenda();
 	}
 }
