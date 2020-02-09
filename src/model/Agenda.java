@@ -19,8 +19,8 @@ public class Agenda {
 		courses = new ArrayList<Course>();
 		readCoursesDatabase();
 		readContactDatabase();
-		
-		
+		System.out.println(assignedCoursesAverage());
+		System.out.println(assignedCreditsAverage());
 	}
 	
 	private void readContactDatabase() throws Exception{
