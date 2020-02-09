@@ -122,6 +122,15 @@ public class Student {
 			age = 0;
 	}
 	
+	public int creditsNumber() {
+		int count = 0;
+		
+		for(Course course : courses)
+			count += course.getCredits();
+		
+		return count;
+	}
+	
 	@Override
 	public String toString() {
 		return "Student [name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber + ", code=" + code
