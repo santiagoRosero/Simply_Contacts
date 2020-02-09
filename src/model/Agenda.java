@@ -3,6 +3,8 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 
+import exceptions.ContactException;
+
 public class Agenda {
 
 	public static final String ContactsDataBase = "./data/StudentsTest.csv";
@@ -63,6 +65,78 @@ public class Agenda {
 			System.out.println(c.toString());
 		}
 	}
+	
+	public Student searchStudentName(String n) throws ContactException {
+		Student find=null;
+		for(int i=0; i<contacts.size(); i++) {
+			if(n.equals(contacts.get(i).getName())) {
+				find=contacts.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new ContactException(ContactException.search);
+		}
+	}
+	
+	public Student searchStudentAdress(String a)throws ContactException{
+		Student find=null;
+		for(int i=0; i<contacts.size(); i++) {
+			if(a.equals(contacts.get(i).getAddress())) {
+				find=contacts.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new ContactException(ContactException.search);
+		}
+	}
+	
+	public Student searchStudentPhone(String p)throws ContactException{
+		Student find=null;
+		for(int i=0; i<contacts.size(); i++) {
+			if(p.equals(contacts.get(i).phoneNumber())) {
+				find=contacts.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new ContactException(ContactException.search);
+		}
+	}
+	
+	public Student searchStudentCode(String c) throws ContactException{
+		Student find=null;
+		for(int i=0; i<contacts.size(); i++) {
+			if(c.equals(contacts.get(i).getCode())) {
+				find=contacts.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new ContactException(ContactException.search);
+		}
+	}
+	
+	public Student searchStudentEmail(String e) throws ContactException {
+		Student find=null;
+		for(int i=0; i<contacts.size(); i++) {
+			if(e.equals(contacts.get(i).getEmail())) {
+				find=contacts.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new ContactException(ContactException.search);
+		}
+	}
+	
+	
 	
 	public static void main (String[] args) throws Exception {
 		@SuppressWarnings("unused")
