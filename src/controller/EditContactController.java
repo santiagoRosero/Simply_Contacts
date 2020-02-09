@@ -1,9 +1,5 @@
 package controller;
 
-/**
- * Controller Class for the Edit Contact window.
- */
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -11,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+/**
+ * Controller Class for the Edit Contact window.
+ */
 public class EditContactController {
 
     @FXML // fx:id="contactNameLabel"
