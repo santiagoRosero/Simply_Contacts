@@ -318,4 +318,26 @@ public class Student {
 		courses.add(c);
 	}
 
+	/**
+	 * Converts all of the information pertinent to this student's info into a single String to be stored in a external persistent file.
+	 * @return A String representation of the information in the following format:<br>
+	 * name;phoneNumber;email;birthdate;address;code;semester;career;photo;courses<br>
+	 * Field birthdate is in the format (DD-MM-YYYY)<br>
+	 * Courses field stores each of the student's enrolled course's NRC, such as 10112/129412/12341/
+	 */
+	public String persist() {
+		//Header = name;phoneNumber;email;birthdate(DD-MM-YYYY);address;code;semester;career;photo;course1/course2
+		String ret = "";
+		//First fields
+		ret+=name+";"+phoneNumber+";"+email+";";
+		//Birth date field
+		ret+=birthdate.getDayOfMonth()+"-"+birthdate.getMonthValue()+"-"+birthdate.getYear()+";";
+		//Last fields
+		ret+=address+";"+code+";"+semester+";"+career+";"+picture+";";
+		//Courses
+		for(Course c:courses) {
+			ret+=c.getNRC()+"/";
+		}
+		return ret;
+	}
 }
