@@ -47,7 +47,6 @@ public class Student {
 	private List<Course> courses;
 	
 	//Methods
-	
 	/**
 	 * Constructor method. Initializes an instance of class Student given the information. This information may be empty, or non existance.
 	 * @param n The name of the student.
@@ -229,4 +228,80 @@ public class Student {
 	public String getEmail() {
 		return email;
 	}
+
+	/**
+	 * Sets the name of this student to the given as parameter.
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Sets the address of this student to the given as parameter.
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * Sets the phone number to the one given as parameter.
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * Sets the code of this student to the one given as parameter.
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * Sets the semester this student is to the one given as parameter. Only numbers over 0 are valid, invalid values are set to default value (1).
+	 * @param semester the semester to set
+	 */
+	public void setSemester(int semester) {
+		if(semester <0) {
+			this.semester = 1;
+		}else {
+			this.semester = semester;
+		}
+	}
+
+	/**
+	 * Sets the career of this student to the one given as parameter.
+	 * @param career the career to set
+	 */
+	public void setCareer(String career) {
+		this.career = career;
+	}
+
+	
+	/**Sets the URL of this picture to the one given as parameter.
+	 * @param picture the picture to set
+	 */
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	/**Sets the birth date of this student to the one in parameter.
+	 * @param birthdate A String representation of this student's birth date in the format "DD/MM/YYYY"
+	 */
+	public void setBirthdate(String birthdate) {
+		calculateBirthdate(birthdate);
+	}
+
+	/**
+	 * Sets the email of this student to the one in parameter.
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 }
