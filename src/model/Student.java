@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,6 +98,12 @@ public class Student {
 			setEmail("");
 		else
 			setEmail(e);
+		
+		courses = new ArrayList<Course>();
+	}
+	
+	public void addClass(Course course) {
+		courses.add(course);
 	}
 	
 	/**

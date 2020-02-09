@@ -1,5 +1,7 @@
 package model;
 
+import java.util.*;
+
 public class Course {
 	
 	/**The number of credits this course has.*/
@@ -14,9 +16,7 @@ public class Course {
 	/** Short Description of the course */
 	private String description;
 	
-	/**Returns the number of credits this course has.
-	 * @return The value of the field credits.
-	 */
+	private List<Student> students;
 	
 	public Course (String NRC, String name, String credits, String description) {
 		
@@ -34,6 +34,11 @@ public class Course {
 		
 		this.description = description;
 		
+		students = new ArrayList<Student>();
+	}
+	
+	public void addStudent(Student student) {
+		students.add(student);
 	}
 	
 	@Override
@@ -41,7 +46,9 @@ public class Course {
 		return "Course [credits=" + credits + ", NRC=" + NRC + ", name=" + name + ", description=" + description + "]";
 	}
 
-
+	public List<Student> getStudents(){
+		return students;
+	}
 
 	public int getNRC() {
 		return NRC;
