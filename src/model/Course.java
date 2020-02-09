@@ -2,7 +2,7 @@ package model;
 import java.util.*;
 
 /**
- * A class to represent the courses in which students are enrolled in the agenda.
+ * A class to represent the courses to which students are enrolled in the agenda.
  * @author Jhon Edward Mora/Juan David Vera
  */
 public class Course {
@@ -11,7 +11,7 @@ public class Course {
 	/**The number of credits this course has.*/
 	private int credits;
 
-	/** The NRC is used to identify a course */
+	/** The NRC used to identify a course */
 	private int NRC;
 	
 	/** Name of the course. */
