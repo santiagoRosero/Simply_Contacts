@@ -2,13 +2,12 @@ package model;
 
 import java.io.*;
 import java.util.*;
-
 import exceptions.ContactException;
 
 public class Agenda {
 
-	public static final String ContactsDataBase = "./data/StudentsTest.csv";
-	public static final String CoursesDataBase = "./data/CoursesTest.csv";
+	public static final String ContactsDataBase = "./data/students.csv";
+	public static final String CoursesDataBase = "./data/courses.csv";
 	
 	private List<Student> contacts;	
 	private List<Course> courses;
@@ -19,8 +18,14 @@ public class Agenda {
 		courses = new ArrayList<>();
 		readCoursesDatabase();
 		readContactDatabase();
-		System.out.println(assignedCoursesAverage());
-		System.out.println(assignedCreditsAverage());
+//		System.out.println(assignedCoursesAverage());
+//		System.out.println(assignedCreditsAverage());
+//		Course c = mostAssignedCourse();
+//		System.out.println(c.getName() +  ", " + c.getStudents().size());
+//		c = lessAssignedCourse();
+//		System.out.println(c.getName() + ", " + c.getStudents().size());
+//		for (Course co : courses) 
+//			System.out.println(co.getName() + ", " + co.getStudents().size());
 	}
 	
 	private void readContactDatabase() throws Exception{
@@ -32,34 +37,37 @@ public class Agenda {
 		
 		while((line = br.readLine()) != null) {
 			
-			String[] data = line.split(",");
+			String[] data = line.split(";");
 			
 			Student contact = new Student(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]);
 			contacts.add(contact);
 			
-			String[] regCourses = data[9].split("/");
-			
-			for(String nrc : regCourses) {
+			if(!data[9].equals(" ")) {
+				String[] regCourses = data[9].split(",");
 				
-				for(Course course : courses) {
+				for(String nrc : regCourses) {
 					
-					if(course.getNRC() == Integer.parseInt(nrc)) {
-						contact.addClass(course);
-						course.addStudent(contact);
-						break;
-					}					
-				}				
-			}		
-			for(Course cour : contact.getCourses()) {
-				System.out.println(contact.getName());
-				System.out.println(cour.getName());
+					for(Course course : courses) {
+						
+						if(course.getNRC() == Integer.parseInt(nrc)) {
+							contact.addClass(course);
+							course.addStudent(contact);
+							break;
+						}					
+					}				
+				}			
 			}
+			
+//			for(Course cour : contact.getCourses()) {
+//				System.out.println(contact.getName());
+//				System.out.println(cour.getName());
+//			}
 		}
 		br.close();
 		
-		for(Student s : contacts) {
-			System.out.println(s.toString());
-		}
+//		for(Student s : contacts) {
+//			System.out.println(s.toString());
+//		}
 		
 	}
 	
@@ -72,17 +80,17 @@ public class Agenda {
 		
 		while((line = br.readLine()) != null) {
 			
-			String[] data = line.split(",");
-			
+			String[] data = line.split(";");
+
 			Course course = new Course(data[0],data[1],data[2],data[3]);
 			courses.add(course);
 			
 		}
 		br.close();
 		
-		for(Course c : courses) {
-			System.out.println(c.toString());
-		}
+//		for(Course c : courses) {
+//			System.out.println(c.toString());
+//		}
 	}
 	
 	public Student searchStudentName(String n) throws ContactException {
@@ -219,12 +227,28 @@ public class Agenda {
 		return (count / contacts.size());		
 	}
 
-	public void mostAssignedCourse() {
-	// sort filter		
+	public Course mostAssignedCourse() {
+
+		Course max = courses.get(0);
+		
+		for(int i = 1; i < courses.size(); i++) {
+			Course current = courses.get(i);
+			if(max.getStudents().size() < current.getStudents().size())
+				max = current;
+		}
+		return max;
 	}
-	
-	public void leastAssignedCourse() {
-		// sort filter
+
+	public Course leastAssignedCourse() {
+		
+		Course min = courses.get(0);
+		
+		for(int i = 1; i < courses.size(); i++) {
+			Course current = courses.get(i);
+			if(min.getStudents().size() > current.getStudents().size())
+				min = current;
+		}
+		return min;
 	}
 
 	/**
@@ -240,7 +264,7 @@ public class Agenda {
 		//Write contact information in database
 		PrintWriter pw = new PrintWriter(new File(ContactsDataBase));
 		pw.write(cts);
-		String crs = "name;credits;nrc";
+		String crs = "name;credits;nrc;description";
 		for(Course c : courses) {
 			crs += c.persist() + "\n";
 		}
