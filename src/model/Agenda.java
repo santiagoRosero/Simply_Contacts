@@ -219,12 +219,28 @@ public class Agenda {
 		return (count / contacts.size());		
 	}
 
-	public void mostAssignedCourse() {
-	// sort filter		
+	public Course mostAssignedCourse() {
+
+		Course max = courses.get(0);
+		
+		for(int i = 1; i < courses.size(); i++) {
+			Course current = courses.get(i);
+			if(max.getStudents().size() < current.getStudents().size())
+				max = current;
+		}
+		return max;
 	}
 	
-	public void lessAssignedCourse() {
-		// sort filter
+	public Course lessAssignedCourse() {
+		
+		Course min = courses.get(0);
+		
+		for(int i = 1; i < courses.size(); i++) {
+			Course current = courses.get(i);
+			if(min.getStudents().size() > current.getStudents().size())
+				min = current;
+		}
+		return min;
 	}
 	
 	/**
@@ -240,7 +256,7 @@ public class Agenda {
 		//Write contact information in database
 		PrintWriter pw = new PrintWriter(new File(ContactsDataBase));
 		pw.write(cts);
-		String crs = "name;credits;nrc";
+		String crs = "name;credits;nrc;description";
 		for(Course c : courses) {
 			crs += c.persist() + "\n";
 		}
