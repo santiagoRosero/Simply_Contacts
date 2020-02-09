@@ -1,7 +1,7 @@
 package controller;
 
 /**
- * Sample Skeleton for 'MainScreen.fxml' Controller Class
+ * Controller Class for the Main Screen window.
  */
 
 import javafx.event.ActionEvent;
@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.image.ImageView;
+import model.Agenda;
 
 public class MainScreenController {
 
@@ -36,6 +37,26 @@ public class MainScreenController {
     private TextArea courseInfoTA; // Value injected by FXMLLoader
 
     @FXML
+    void addCourse(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addStudent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deleteCurrentCourse(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deleteCurrentStudent(ActionEvent event) {
+
+    }
+
+    @FXML
     void editCourse(ActionEvent event) {
 
     }
@@ -52,6 +73,26 @@ public class MainScreenController {
 
     @FXML
     void getPrevStudent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void loadDatabase(ActionEvent event) {
+
+    }
+
+    @FXML
+    void openCourseSearchWindow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void openStudentSearchWindow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void unloadDatabase(ActionEvent event) {
 
     }
 

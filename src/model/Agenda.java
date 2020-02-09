@@ -13,10 +13,10 @@ public class Agenda {
 	private List<Student> contacts;	
 	private List<Course> courses;
 	
-	public Agenda() throws Exception{
+	public Agenda() throws Exception{//TODO: what exception?
 		
-		contacts = new ArrayList<Student>();
-		courses = new ArrayList<Course>();
+		contacts = new ArrayList<>();
+		courses = new ArrayList<>();
 		readCoursesDatabase();
 		readContactDatabase();
 		System.out.println(assignedCoursesAverage());
@@ -180,13 +180,8 @@ public class Agenda {
 	// sort filter		
 	}
 	
-	public void lessAssignedCourse() {
+	public void leastAssignedCourse() {
 		// sort filter
-	}
-	
-	public static void main (String[] args) throws Exception {
-		@SuppressWarnings("unused")
-		Agenda agenda = new Agenda();
 	}
 	
 }
