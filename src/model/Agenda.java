@@ -154,7 +154,50 @@ public class Agenda {
 			throw new ContactException(ContactException.search);
 		}
 	}
+
+	public Course searchCourseName(String n)throws Exception {
+		Course find=null;
+		for(int i=0; i<courses.size(); i++) {
+			if(n.equals(courses.get(i).getName())) {
+				find=courses.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new Exception("this course doesn't exist in the program");
+		}
+	}
 	
+	@SuppressWarnings("unlikely-arg-type")
+	public Course searchCourseNrc(String nrc) throws Exception {
+		Course find=null;
+		for(int i=0; i<courses.size(); i++) {
+			if(nrc.equals(courses.get(i).getNRC())) {
+				find=courses.get(i);
+			}
+		}
+		if(find!=null) {
+			return find;
+		}else {
+			throw new Exception("The course with this NRC doesn't exist in the program");
+		}
+	}
+	
+	@SuppressWarnings({ "unlikely-arg-type"})
+	public ArrayList<Course> searchCourseCredits(String c) throws Exception {
+		ArrayList<Course> find=new ArrayList<Course>();
+		for(int i=0; i<courses.size(); i++) {
+			if(c.equals(courses.get(i).getCredits())) {
+				find.add(courses.get(i));
+			}
+		}
+		if(find.isEmpty()) {
+			return find;
+		}else {
+			throw new Exception("Doesn't exist courses with this number of credits");
+		}
+	}
 
 	public int assignedCoursesAverage() {
 		
@@ -183,5 +226,31 @@ public class Agenda {
 	public void leastAssignedCourse() {
 		// sort filter
 	}
+
+	/**
+	 * Transforms every contact and course stored in the program to a String and outputs their information to a external persistent database.
+	 * @throws IOException When there's an error reading the files.
+	 */
+	public void outputContacts() throws IOException {
+		//Obtain info from contacts
+		String cts = "name;phoneNumber;email;birthdate(DD-MM-YYYY);address;code;semester;career;photo;courses";
+		for(Student s : contacts) {
+			cts += s.persist() + "\n";
+		}
+		//Write contact information in database
+		PrintWriter pw = new PrintWriter(new File(ContactsDataBase));
+		pw.write(cts);
+		String crs = "name;credits;nrc";
+		for(Course c : courses) {
+			crs += c.persist() + "\n";
+		}
+		pw = new PrintWriter(new File(CoursesDataBase));
+		pw.write(crs);
+		pw.close();
+	}
 	
+	public static void main (String[] args) throws Exception {
+		@SuppressWarnings("unused")
+		Agenda agenda = new Agenda();
+	}
 }
