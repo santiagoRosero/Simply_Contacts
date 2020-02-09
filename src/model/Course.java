@@ -147,7 +147,7 @@ public class Course {
 	 * name;credits;NRC;description
 	 */
 	public String persist() {
-		//name;credits;nrc
+		//Header: name;credits;nrc
 		String ret = "";
 		return ret += name+";"+credits+";"+NRC+";"+description;
 	}
