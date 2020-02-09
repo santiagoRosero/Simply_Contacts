@@ -2,7 +2,9 @@ package model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
+import exceptions.ContactException;
 
 /**
  * Class used to represent all of the entries in the agenda. Each of the entries in this agenda is a student. Stores general info of them.
@@ -58,20 +60,23 @@ public class Student {
 	 * @param s The semester the student is in.
 	 * @param cr The career the student is in.
 	 * @param pc The URL to the student's picture.
+	 * @throws ContactException 
 	 */
-	public Student(String n, String p, String e, String b, String a, String c, String s, String cr, String pc) {
-		if(n == null)
-			name = "";
-		else
+	public Student(String n, String p, String e, String b, String a, String c, String s, String cr, String pc) throws ContactException {
+		if(n == null) {
+			throw new ContactException(ContactException.name);
+		}
+			else
 			name = n;
+		if(p == null) {
+			throw new ContactException(ContactException.number);
+		}
+		else
+			phoneNumber = p;
 		if(a == null)
 			address = "";
 		else
 			address = a;
-		if(p == null)
-			phoneNumber = "";
-		else
-			phoneNumber = p;
 		if(c == null)
 			code = "";
 		else
@@ -96,6 +101,7 @@ public class Student {
 			email = "";
 		else
 			email = e;
+		courses = new ArrayList<Course>();
 	}
 	
 	/**
@@ -302,6 +308,14 @@ public class Student {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	/**
+	 * Registers this student in the given course.
+	 * @param c The given course for this student to be registered in.
+	 */
+	public void addClass(Course c) {
+		courses.add(c);
 	}
 
 }

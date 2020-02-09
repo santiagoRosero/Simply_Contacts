@@ -49,6 +49,7 @@ public class Course {
 		
 		this.description = description;
 		
+		students = new ArrayList<Student>();
 	}
 	
 	@Override
