@@ -109,7 +109,7 @@ public class Student {
 	 * @param b A String representation of the birth date of this student in the format "DD/MM/YYYY"
 	 */
 	private void calculateBirthdate(String b) {
-		String[] parts = b.split("-");
+		String[] parts = b.split("/");
 		int days = Integer.parseInt(parts[0]);
 		int months = Integer.parseInt(parts[1]);
 		int year = Integer.parseInt(parts[2]);
@@ -340,12 +340,12 @@ public class Student {
 		//First fields
 		ret+=name+";"+phoneNumber+";"+email+";";
 		//Birth date field
-		ret+=birthdate.getDayOfMonth()+"-"+birthdate.getMonthValue()+"-"+birthdate.getYear()+";";
+		ret+=birthdate.getDayOfMonth()+"/"+birthdate.getMonthValue()+"/"+birthdate.getYear()+";";
 		//Last fields
 		ret+=address+";"+code+";"+semester+";"+career+";"+picture+";";
 		//Courses
 		for(Course c:courses) {
-			ret+=c.getNRC()+"/";
+			ret+=c.getNRC()+",";
 		}
 		return ret;
 	}

@@ -33,7 +33,7 @@ public class Course {
 	 * @param credits The number of credits in this course. Defaults to 0.
 	 * @param description A short description of this course.
 	 */
-	public Course (String NRC, String name, String credits, String description) {
+	public Course (String name, String credits, String NRC, String description) {
 		
 		if(NRC.isEmpty())
 			this.NRC = 0;
@@ -47,7 +47,10 @@ public class Course {
 		else
 			this.credits = Integer.parseInt(credits);
 		
-		this.description = description;
+		if(description.isEmpty())
+			this.description = "";
+		else
+			this.description = description;
 		
 		students = new ArrayList<Student>();
 	}
