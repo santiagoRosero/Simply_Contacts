@@ -80,18 +80,20 @@ public class EditContactController {
 
     @FXML
     void saveStudent(ActionEvent e) throws Exception {
-        Student studenToAdd = new Student(contactNameLabel.getText(), phoneTF.getText(), emailTF.getText(),
+        Student studentToAdd = new Student(contactNameLabel.getText(), phoneTF.getText(), emailTF.getText(),
                 dobTF.getText(), addressTF.getText(), idTF.getText(), semesterTF.getText(), careerTF.getText()
                 , photoURL_TF.getText());
 
-        studenToAdd.getCourses().clear();
-        String[] nrc = nrcTF.getText().split(",");
-        for (int i = 0; i < nrc.length; i++) {
-            Course toAdd = agenda.searchCourseNrc(nrc[i]);
-            studenToAdd.getCourses().add(toAdd);
+        if (!nrcTF.getText().isEmpty()) {
+            studentToAdd.getCourses().clear();
+            String[] nrc = nrcTF.getText().split(",");
+            for (int i = 0; i < nrc.length; i++) {
+                Course toAdd = agenda.searchCourseNrc(nrc[i]);
+                studentToAdd.getCourses().add(toAdd);
+            }
         }
 
-        student = studenToAdd;
+        student = studentToAdd;
 
         returnToMainScreen(e);
         mainController.loadStudent();
@@ -130,7 +132,6 @@ public class EditContactController {
         }
 
     }
-
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
