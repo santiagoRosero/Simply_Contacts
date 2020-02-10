@@ -4,12 +4,8 @@ package controller;
  * Controller Class for the Main Screen window.
  */
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,9 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Agenda;
 import model.Course;
 import model.Student;
@@ -90,8 +84,13 @@ public class MainScreenController {
     @FXML
     void deleteCurrentStudent() {
         int indexOfStudent = agenda.getContacts().indexOf(currentStudent);
+        if (indexOfStudent == agenda.getContacts().size() - 1) {
+            currentStudent = agenda.getContacts().get(0);
+        } else {
+            currentStudent = agenda.getContacts().get(indexOfStudent + 1);
+        }
         agenda.deleteContact(indexOfStudent);
-        //TODO
+        loadStudent();
     }
 
     @FXML
@@ -110,7 +109,16 @@ public class MainScreenController {
 
     @FXML
     void editStudent() throws IOException {
-        loadStage("../view/EditContact.fxml", "Edit Contact");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/EditContact.fxml"));
+        Parent root = fxmlLoader.load();
+        EditContactController controller = fxmlLoader.getController();
+        controller.setStudent(currentStudent);
+        controller.setup();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Contact");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -137,7 +145,15 @@ public class MainScreenController {
 
     @FXML
     void loadReport() throws IOException {
-        loadStage("../view/Report.fxml", "Report");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/Report.fxml"));
+        Parent root = fxmlLoader.load();
+        ReportController controller = fxmlLoader.getController();
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Report");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
