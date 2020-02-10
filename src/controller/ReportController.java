@@ -9,12 +9,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import model.Agenda;
 
 import java.io.IOException;
 
 public class ReportController {
 
     private Stage stage;
+    private Agenda agenda;
 
     @FXML // fx:id="avgCourses_Student_Label"
     private Label avgCourses_Student_Label; // Value injected by FXMLLoader
@@ -52,5 +54,9 @@ public class ReportController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 }

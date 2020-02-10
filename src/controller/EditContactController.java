@@ -2,11 +2,13 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.Course;
+import model.Student;
 
 /**
  * Controller Class for the Edit Contact window.
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 public class EditContactController {
 
     private Stage stage;
+    private Student student;
 
     @FXML // fx:id="contactNameLabel"
     private Label contactNameLabel; // Value injected by FXMLLoader
@@ -49,6 +52,12 @@ public class EditContactController {
     private TextField nrcTF; // Value injected by FXMLLoader
 
     @FXML
+    void initialize() {
+
+
+    }
+
+    @FXML
     void returnToMainScreen(ActionEvent event) {
 
     }
@@ -60,6 +69,35 @@ public class EditContactController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public void setup(){
+        if (student == null) {
+            displayPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
+        } else {
+            displayPhoto.setImage(new Image(student.getPictureURL()));
+            contactNameLabel.setText(student.getName());
+            nameTF.setText(student.getName());
+            phoneTF.setText(student.phoneNumber());
+            emailTF.setText(student.getEmail());
+            dobTF.setText(student.getBirthdate());
+            addressTF.setText(student.getAddress());
+            idTF.setText(student.getCode());
+            careerTF.setText(student.getCareer());
+            photoURL_TF.setText(student.getPictureURL());
+            String toAdd = "";
+            for (Course course : student.getCourses()
+            ) {
+                toAdd += course.getNRC() + ",";
+            }
+            toAdd = toAdd.substring(0, toAdd.length() - 1);
+            nrcTF.setText(toAdd);
+        }
+
     }
 }
 
