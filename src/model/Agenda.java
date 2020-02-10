@@ -3,8 +3,6 @@ package model;
 import java.io.*;
 import java.util.*;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath.Step;
-
 import exceptions.ContactException;
 
 public class Agenda {
@@ -275,7 +273,7 @@ public class Agenda {
 	}
 
 	/**
-	 * Transforms every contact and course stored in the program to a String and outputs their information to a external persistent database.
+	 * Transforms every contact and course stored in the program to a String and outputs their information to an external, persistent database.
 	 * @throws IOException When there's an error reading the files.
 	 */
 	public void outputContacts() throws IOException {
