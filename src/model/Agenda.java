@@ -101,6 +101,13 @@ public class Agenda {
 		return student;
 	}
 	
+	public void removeStudentFromCourse(Course course, Student student) {
+		student.deleteCourse(course);
+		course.unenroll(student);
+		if(course.getStudents().size() == 0)
+			courses.remove(course);
+	}
+	
 	public List<Student> getContacts(){
 		return contacts;
 	}

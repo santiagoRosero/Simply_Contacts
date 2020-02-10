@@ -131,6 +131,10 @@ public class Student {
 		return count;
 	}
 	
+	public void deleteCourse(Course courseToDelete) {
+		courses.remove(courseToDelete);		
+	}
+	
 	@Override
 	public String toString() {
 		return "Student [name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber + ", code=" + code
