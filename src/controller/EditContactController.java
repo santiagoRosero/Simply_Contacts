@@ -55,6 +55,9 @@ public class EditContactController {
     @FXML // fx:id="idTF"
     private TextField idTF; // Value injected by FXMLLoader
 
+    @FXML // fx:id="semesterTF"
+    private TextField semesterTF; // Value injected by FXMLLoader
+
     @FXML // fx:id="photoURL_TF"
     private TextField photoURL_TF; // Value injected by FXMLLoader
 
@@ -77,20 +80,19 @@ public class EditContactController {
 
     @FXML
     void saveStudent(ActionEvent e) throws Exception {
-        student.setName(contactNameLabel.getText());
-        student.setPhoneNumber(phoneTF.getText());
-        student.setEmail(emailTF.getText());
-        student.setBirthdate(dobTF.getText());
-        student.setAddress(addressTF.getText());
-        student.setCode(idTF.getText());
-        student.setCareer(careerTF.getText());
-        student.setPicture(photoURL_TF.getText());
-        student.getCourses().clear();
+        Student studenToAdd = new Student(contactNameLabel.getText(), phoneTF.getText(), emailTF.getText(),
+                dobTF.getText(), addressTF.getText(), idTF.getText(), semesterTF.getText(), careerTF.getText()
+                , photoURL_TF.getText());
+
+        studenToAdd.getCourses().clear();
         String[] nrc = nrcTF.getText().split(",");
         for (int i = 0; i < nrc.length; i++) {
             Course toAdd = agenda.searchCourseNrc(nrc[i]);
-            student.getCourses().add(toAdd);
+            studenToAdd.getCourses().add(toAdd);
         }
+
+        student = studenToAdd;
+
         returnToMainScreen(e);
         mainController.loadStudent();
     }
