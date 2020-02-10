@@ -38,14 +38,14 @@ public class SearchContactController {
     }
 
     @FXML
-    void returnToMainScreen() {
-//        final Node source = (Node) event.getSource();
-//        final Stage stage = (Stage) source.getScene().getWindow();
-//        stage.close();
+    void returnToMainScreen(ActionEvent e) {
+        final Node source = (Node) e.getSource();
+        final Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
-    void searchContact() {
+    void searchContact(ActionEvent e) {
         if (infoTF.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Information field is empty", ButtonType.OK);
             alert.show();
@@ -89,9 +89,9 @@ public class SearchContactController {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "No contact found", ButtonType.OK);
                 alert.show();
             } else {
-                student = toFind;
-                returnToMainScreen();
+                mainController.setCurrentStudent(toFind);
                 mainController.loadStudent();
+                returnToMainScreen(e);
             }
         }
     }

@@ -39,7 +39,7 @@ public class MainScreenController {
     @FXML
     void initialize() {
         studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
-        if (agenda.getContacts().get(0) != null) {
+        if (!agenda.getContacts().isEmpty()) {
             currentStudent = agenda.getContacts().get(0);
             selectedCourse = null;
             loadStudent();
@@ -176,7 +176,7 @@ public class MainScreenController {
 
     @FXML
     void openStudentSearchWindow() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SearchContactController.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SearchContact.fxml"));
         Parent root = fxmlLoader.load();
         SearchContactController controller = fxmlLoader.getController();
         controller.setStudent(currentStudent);
@@ -262,6 +262,9 @@ public class MainScreenController {
         agenda.outputContacts();
     }
 
+    public void setCurrentStudent(Student currentStudent) {
+        this.currentStudent = currentStudent;
+    }
 }
 
 
