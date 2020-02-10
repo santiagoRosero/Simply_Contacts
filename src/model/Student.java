@@ -50,7 +50,7 @@ public class Student {
 	
 	//Methods
 	/**
-	 * Constructor method. Initializes an instance of class Student given the information. This information may be empty, or non existance.
+	 * Constructor method. Initializes an instance of class Student given the information. This information may be empty or non-existent.
 	 * @param n The name of the student.
 	 * @param p The phone number of the student.
 	 * @param e the email
@@ -144,8 +144,7 @@ public class Student {
 	public String getName() {
 		return name;
 	}
-	
-	
+
 	/**
 	 * Returns the address of this student.
 	 * @return The value of the field address. May be an empty field, but never null.
@@ -330,12 +329,12 @@ public class Student {
 	/**
 	 * Converts all of the information pertinent to this student's info into a single String to be stored in a external persistent file.
 	 * @return A String representation of the information in the following format:<br>
-	 * name;phoneNumber;email;birthdate;address;code;semester;career;photo;courses<br>
-	 * Field birthdate is in the format (DD-MM-YYYY)<br>
+	 * name;phoneNumber;email;birthday;address;code;semester;career;photo;courses<br>
+	 * Field birthday is in the format (DD-MM-YYYY)<br>
 	 * Courses field stores each of the student's enrolled course's NRC, such as 10112/129412/12341/
 	 */
 	public String persist() {
-		//Header = name;phoneNumber;email;birthdate(DD-MM-YYYY);address;code;semester;career;photo;course1/course2
+		//Header = name;phoneNumber;email;birthday(DD-MM-YYYY);address;code;semester;career;photo;course1/course2
 		String ret = "";
 		//First fields
 		ret+=name+";"+phoneNumber+";"+email+";";

@@ -10,10 +10,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Agenda;
 
 public class MainScreenController {
+
+    private Agenda agenda;
+
+    {
+        try {
+            agenda = new Agenda();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void initialize() {
+        studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
+    }
 
     @FXML // fx:id="studentPhoto"
     private ImageView studentPhoto; // Value injected by FXMLLoader
@@ -38,7 +54,7 @@ public class MainScreenController {
 
     @FXML
     void addCourse(ActionEvent event) {
-
+//        agenda
     }
 
     @FXML
