@@ -4,15 +4,23 @@ package controller;
  * Controller Class for the Main Screen window.
  */
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.Agenda;
 import model.Course;
 import model.Student;
@@ -37,8 +45,9 @@ public class MainScreenController {
     @FXML
     void initialize() {
         studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
-        currentStudent = null;
+        currentStudent = agenda.getContacts().get(0);
         selectedCourse = null;
+        loadStudent();
     }
 
     @FXML // fx:id="studentPhoto"
@@ -51,13 +60,13 @@ public class MainScreenController {
     private TextArea informationTA; // Value injected by FXMLLoader
 
     @FXML // fx:id="coursesTV"
-    private TableView<?> coursesTV; // Value injected by FXMLLoader
+    private TableView<Course> coursesTV; // Value injected by FXMLLoader
 
     @FXML // fx:id="coursesTVColumn"
-    private TableColumn<?, ?> coursesTVColumn; // Value injected by FXMLLoader
+    private TableColumn coursesTVColumn; // Value injected by FXMLLoader
 
     @FXML // fx:id="creditsTVColumn"
-    private TableColumn<?, ?> creditsTVColumn; // Value injected by FXMLLoader
+    private TableColumn creditsTVColumn; // Value injected by FXMLLoader
 
     @FXML // fx:id="courseInfoTA"
     private TextArea courseInfoTA; // Value injected by FXMLLoader
@@ -75,7 +84,7 @@ public class MainScreenController {
     @FXML
     void deleteCurrentCourse() {
         currentStudent.getCourses().remove(selectedCourse);
-        //TODO
+        loadStudent();
     }
 
     @FXML
@@ -106,12 +115,24 @@ public class MainScreenController {
 
     @FXML
     void getNextStudent() {
-
+        int currentIndex = agenda.getContacts().indexOf(currentStudent);
+        if (currentIndex == agenda.getContacts().size() - 1) {
+            currentStudent = agenda.getContacts().get(0);
+        } else {
+            currentStudent = agenda.getContacts().get(currentIndex + 1);
+        }
+        loadStudent();
     }
 
     @FXML
-    void getPrevStudent(ActionEvent event) {
-
+    void getPrevStudent() {
+        int currentIndex = agenda.getContacts().indexOf(currentStudent);
+        if (currentIndex == 0) {
+            currentStudent = agenda.getContacts().get(agenda.getContacts().size() - 1);
+        } else {
+            currentStudent = agenda.getContacts().get(currentIndex - 1);
+        }
+        loadStudent();
     }
 
     @FXML
@@ -120,13 +141,13 @@ public class MainScreenController {
     }
 
     @FXML
-    void openCourseSearchWindow(ActionEvent event) {
-
+    void openCourseSearchWindow() throws IOException {
+        loadStage("../view/SearchCourse.fxml", "Search Course");
     }
 
     @FXML
-    void openStudentSearchWindow(ActionEvent event) {
-
+    void openStudentSearchWindow() throws IOException {
+        loadStage("../view/SearchContact.fxml", "Search Contact");
     }
 
     private void loadStage(String path, String title) throws IOException {
@@ -139,4 +160,58 @@ public class MainScreenController {
         stage.show();
     }
 
+
+    @FXML
+    void showSelectedCourseInfo() {
+        selectedCourse = coursesTV.getSelectionModel().getSelectedItem();
+        String infoToAdd = "Course Name: ";
+        infoToAdd += selectedCourse.getName() + "\n";
+        infoToAdd += "Credits: ";
+        infoToAdd += selectedCourse.getCredits() + "\n";
+        infoToAdd += "NRC: ";
+        infoToAdd += selectedCourse.getNRC() + "\n\n";
+        infoToAdd += "Enrolled Students: " + "\n";
+        for (Student student : selectedCourse.getStudents()
+        ) {
+            infoToAdd += student.getName() + "\n";
+        }
+        courseInfoTA.setText(infoToAdd);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void loadStudent() {
+        studentPhoto.setImage(new Image(currentStudent.getPictureURL()));
+        studentLabel.setText(currentStudent.getName());
+        String infoToAdd = "Name: ";
+        infoToAdd += currentStudent.getName() + "\n";
+        infoToAdd += "Phone: ";
+        infoToAdd += currentStudent.phoneNumber() + "\n";
+        infoToAdd += "E-mail: ";
+        infoToAdd += currentStudent.getEmail() + "\n";
+        infoToAdd += "Birthday: ";
+        infoToAdd += currentStudent.getBirthdate() + "\n";
+        infoToAdd += "Address: ";
+        infoToAdd += currentStudent.getAddress() + "\n";
+        infoToAdd += "Student ID: ";
+        infoToAdd += currentStudent.getCode() + "\n";
+        infoToAdd += "Program: ";
+        infoToAdd += currentStudent.getCareer() + "\n";
+        informationTA.setText(infoToAdd);
+
+        coursesTV.getColumns().clear();
+        coursesTV.getColumns().addAll(coursesTVColumn, creditsTVColumn);
+        ObservableList<Course> observableCourses = FXCollections.observableArrayList();
+        observableCourses.addAll(currentStudent.getCourses());
+        coursesTVColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+        creditsTVColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("credits"));
+
+        coursesTV.setItems(observableCourses);
+    }
+
 }
+
+
+
+
+
+
