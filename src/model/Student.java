@@ -39,7 +39,7 @@ public class Student {
 	private String picture;
 	
 	/**The birth date of this student.*/
-	private LocalDate birthdate;
+	private String birthdate;
 	
 	/**The email of this student.*/
 	private String email;
@@ -109,17 +109,18 @@ public class Student {
 	 * @param b A String representation of the birth date of this student in the format "DD/MM/YYYY"
 	 */
 	private void calculateBirthdate(String b) {
-		String[] parts = b.split("/");
-		int days = Integer.parseInt(parts[0]);
-		int months = Integer.parseInt(parts[1]);
-		int year = Integer.parseInt(parts[2]);
-		LocalDate l = LocalDate.of(year, months, days);
-		birthdate = l;
-		
-		if(birthdate != null)
-			age = Period.between(birthdate, LocalDate.now()).getYears();
-		else
-			age = 0;
+		birthdate = b;
+//		String[] parts = b.split("/");
+//		int days = Integer.parseInt(parts[0]);
+//		int months = Integer.parseInt(parts[1]);
+//		int year = Integer.parseInt(parts[2]);
+//		LocalDate l = LocalDate.of(year, months, days);
+//		birthdate = l;
+//
+//		if(birthdate != null)
+//			age = Period.between(birthdate, LocalDate.now()).getYears();
+//		else
+//			age = 0;
 	}
 	
 	public int creditsNumber() {
@@ -210,13 +211,14 @@ public class Student {
 	 * @return Either a birthday in the format "DD of MM", or an empty string if the birthdate value is empty.
 	 */
 	public String getBirthdate() {
-		if(birthdate != null) {
-			int days = birthdate.getDayOfMonth();
-			String month = birthdate.getMonth().name();
-			return days + " of " + month;
-		}else {
-			return "";
-		}
+return birthdate;
+		//		if(birthdate != null) {
+//			int days = birthdate.getDayOfMonth();
+//			String month = birthdate.getMonth().name();
+//			return days + " of " + month;
+//		}else {
+//			return "";
+//		}
 	}
 	
 	/**
@@ -343,7 +345,8 @@ public class Student {
 		//First fields
 		ret+=name+";"+phoneNumber+";"+email+";";
 		//Birth date field
-		ret+=birthdate.getDayOfMonth()+"/"+birthdate.getMonthValue()+"/"+birthdate.getYear()+";";
+		ret+=birthdate;
+//		ret+=birthdate.getDayOfMonth()+"/"+birthdate.getMonthValue()+"/"+birthdate.getYear()+";";
 		//Last fields
 		ret+=address+";"+code+";"+semester+";"+career+";"+picture+";";
 		//Courses
