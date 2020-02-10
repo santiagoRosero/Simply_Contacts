@@ -2,6 +2,9 @@ package model;
 
 import java.io.*;
 import java.util.*;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath.Step;
+
 import exceptions.ContactException;
 
 public class Agenda {
@@ -91,6 +94,21 @@ public class Agenda {
 //		for(Course c : courses) {
 //			System.out.println(c.toString());
 //		}
+	}
+	
+	public Student addStudent(String name, String phone, String email, String bDay, String address, String code, String semester, String career, String picture) throws Exception{
+		
+		Student student = new Student(name, phone, email, bDay, address, code, semester, career, picture);
+		contacts.add(student);
+		return student;
+	}
+	
+	public List<Student> getContacts(){
+		return contacts;
+	}
+	
+	public List<Course> getCourses(){
+		return courses;
 	}
 	
 	public Student searchStudentName(String n) throws ContactException {
