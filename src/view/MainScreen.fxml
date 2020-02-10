@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
    <children>
       <MenuBar prefHeight="57.0" prefWidth="976.0" style="-fx-padding: 15; -fx-background-color: white; -fx-background-insets: 8;">
         <menus>
@@ -50,7 +41,7 @@
          <children>
             <HBox prefHeight="358.0" prefWidth="462.0" spacing="20.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="333.0" prefWidth="181.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="333.0" prefWidth="206.0">
                      <children>
                         <ImageView fx:id="studentPhoto" fitHeight="183.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
                            <VBox.margin>
@@ -59,7 +50,7 @@
                         </ImageView>
                         <Label fx:id="studentLabel" alignment="TOP_CENTER" prefHeight="44.0" prefWidth="197.0" text="Full Name">
                            <font>
-                              <Font name="Comic Sans MS" size="16.0" />
+                              <Font name="Comic Sans MS" size="14.0" />
                            </font>
                            <padding>
                               <Insets top="5.0" />
@@ -78,7 +69,7 @@
                         <Insets top="15.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="323.0" prefWidth="245.0">
+                  <VBox prefHeight="323.0" prefWidth="224.0">
                      <children>
                         <Label text="Information">
                            <font>
@@ -88,7 +79,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <TextArea fx:id="informationTA" editable="false" prefHeight="214.0" prefWidth="224.0">
+                        <TextArea fx:id="informationTA" editable="false" prefHeight="214.0" prefWidth="218.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -96,7 +87,7 @@
                               <Insets top="5.0" />
                            </VBox.margin>
                            <font>
-                              <Font name="Comic Sans MS" size="14.0" />
+                              <Font name="Comic Sans MS" size="12.0" />
                            </font>
                         </TextArea>
                      </children>
@@ -112,7 +103,7 @@
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <HBox prefHeight="358.0" prefWidth="526.0" spacing="15.0">
                <children>
-                  <VBox prefHeight="323.0" prefWidth="147.0">
+                  <VBox prefHeight="323.0" prefWidth="209.0">
                      <children>
                         <Label prefHeight="23.0" prefWidth="247.0" text="Courses / Credits">
                            <font>
@@ -125,10 +116,10 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <TableView fx:id="coursesTV" prefHeight="205.0" prefWidth="147.0">
+                        <TableView fx:id="coursesTV" onMouseClicked="#showSelectedCourseInfo" prefHeight="205.0" prefWidth="147.0">
                           <columns>
-                            <TableColumn fx:id="coursesTVColumn" prefWidth="75.0" text="Course" />
-                            <TableColumn fx:id="creditsTVColumn" prefWidth="75.0" text="Credits" />
+                            <TableColumn fx:id="coursesTVColumn" prefWidth="140.0" text="Courses" />
+                            <TableColumn fx:id="creditsTVColumn" prefWidth="68.0" text="Credits" />
                           </columns>
                            <VBox.margin>
                               <Insets top="5.0" />
@@ -147,7 +138,7 @@
                         <Insets top="25.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="333.0" prefWidth="299.0">
+                  <VBox prefHeight="323.0" prefWidth="254.0">
                      <children>
                         <Label text="Course Information">
                            <font>
