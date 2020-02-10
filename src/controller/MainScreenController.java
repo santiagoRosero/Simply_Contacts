@@ -39,9 +39,11 @@ public class MainScreenController {
     @FXML
     void initialize() {
         studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
-        currentStudent = agenda.getContacts().get(0);
-        selectedCourse = null;
-        loadStudent();
+        if (agenda.getContacts().get(0) != null) {
+            currentStudent = agenda.getContacts().get(0);
+            selectedCourse = null;
+            loadStudent();
+        }
     }
 
     @FXML // fx:id="studentPhoto"
@@ -180,24 +182,31 @@ public class MainScreenController {
 
     @FXML
     void showSelectedCourseInfo() {
-        selectedCourse = coursesTV.getSelectionModel().getSelectedItem();
-        String infoToAdd = "Course Name: ";
-        infoToAdd += selectedCourse.getName() + "\n";
-        infoToAdd += "Credits: ";
-        infoToAdd += selectedCourse.getCredits() + "\n";
-        infoToAdd += "NRC: ";
-        infoToAdd += selectedCourse.getNRC() + "\n\n";
-        infoToAdd += "Enrolled Students: " + "\n";
-        for (Student student : selectedCourse.getStudents()
-        ) {
-            infoToAdd += student.getName() + "\n";
+        if (coursesTV.getSelectionModel().getSelectedItem() != null) {
+            selectedCourse = coursesTV.getSelectionModel().getSelectedItem();
+            String infoToAdd = "Course Name: ";
+            infoToAdd += selectedCourse.getName() + "\n";
+            infoToAdd += "Credits: ";
+            infoToAdd += selectedCourse.getCredits() + "\n";
+            infoToAdd += "NRC: ";
+            infoToAdd += selectedCourse.getNRC() + "\n\n";
+            infoToAdd += "Enrolled Students: " + "\n";
+            for (Student student : selectedCourse.getStudents()
+            ) {
+                infoToAdd += student.getName() + "\n";
+            }
+            courseInfoTA.setText(infoToAdd);
         }
-        courseInfoTA.setText(infoToAdd);
+
     }
 
     @SuppressWarnings("unchecked")
     public void loadStudent() {
-        studentPhoto.setImage(new Image(currentStudent.getPictureURL()));
+        if (!currentStudent.getPictureURL().equals(" ")) {
+            studentPhoto.setImage(new Image(currentStudent.getPictureURL()));
+        } else {
+            studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
+        }
         studentLabel.setText(currentStudent.getName());
         String infoToAdd = "Name: ";
         infoToAdd += currentStudent.getName() + "\n";
@@ -216,6 +225,8 @@ public class MainScreenController {
         informationTA.setText(infoToAdd);
 
         coursesTV.getColumns().clear();
+        coursesTVColumn.getColumns().clear();
+        creditsTVColumn.getColumns().clear();
         coursesTV.getColumns().addAll(coursesTVColumn, creditsTVColumn);
         ObservableList<Course> observableCourses = FXCollections.observableArrayList();
         observableCourses.addAll(currentStudent.getCourses());
