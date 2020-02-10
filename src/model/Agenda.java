@@ -2,6 +2,7 @@ package model;
 
 import java.io.*;
 import java.util.*;
+
 import exceptions.ContactException;
 
 public class Agenda {
@@ -93,6 +94,28 @@ public class Agenda {
 //		}
 	}
 	
+	public Student addStudent(String name, String phone, String email, String bDay, String address, String code, String semester, String career, String picture) throws Exception{
+		
+		Student student = new Student(name, phone, email, bDay, address, code, semester, career, picture);
+		contacts.add(student);
+		return student;
+	}
+	
+	public void removeStudentFromCourse(Course course, Student student) {
+		student.deleteCourse(course);
+		course.unenroll(student);
+		if(course.getStudents().size() == 0)
+			courses.remove(course);
+	}
+	
+	public List<Student> getContacts(){
+		return contacts;
+	}
+	
+	public List<Course> getCourses(){
+		return courses;
+	}
+	
 	public Student searchStudentName(String n) throws ContactException {
 		Student find=null;
 		for(int i=0; i<contacts.size(); i++) {
@@ -177,11 +200,10 @@ public class Agenda {
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public Course searchCourseNrc(String nrc) throws Exception {
 		Course find=null;
 		for(int i=0; i<courses.size(); i++) {
-			if(nrc.equals(courses.get(i).getNRC())) {
+			if(Integer.parseInt(nrc) == courses.get(i).getNRC()) {
 				find=courses.get(i);
 			}
 		}
@@ -192,11 +214,10 @@ public class Agenda {
 		}
 	}
 	
-	@SuppressWarnings({ "unlikely-arg-type"})
 	public ArrayList<Course> searchCourseCredits(String c) throws Exception {
 		ArrayList<Course> find=new ArrayList<Course>();
 		for(int i=0; i<courses.size(); i++) {
-			if(c.equals(courses.get(i).getCredits())) {
+			if(Integer.parseInt(c) == (courses.get(i).getCredits())) {
 				find.add(courses.get(i));
 			}
 		}
@@ -252,7 +273,7 @@ public class Agenda {
 	}
 
 	/**
-	 * Transforms every contact and course stored in the program to a String and outputs their information to a external persistent database.
+	 * Transforms every contact and course stored in the program to a String and outputs their information to an external, persistent database.
 	 * @throws IOException When there's an error reading the files.
 	 */
 	public void outputContacts() throws IOException {
@@ -273,8 +294,19 @@ public class Agenda {
 		pw.close();
 	}
 	
+	/** 
+	 * Removes a contact from the list given the index of the contact.
+	 * @param index The index of the contact to be deleted. Must be higher than 0 and lesser than <code>contacts.size()</code>
+	 */
+	public void deleteContact(int index) {
+		Student s = contacts.get(index);
+		s.unenroll();
+		contacts.remove(index);
+	}
+	
 	public static void main (String[] args) throws Exception {
 		@SuppressWarnings("unused")
 		Agenda agenda = new Agenda();
 	}
+
 }

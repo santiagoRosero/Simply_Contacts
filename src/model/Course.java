@@ -55,6 +55,25 @@ public class Course {
 		students = new ArrayList<Student>();
 	}
 	
+	/**
+	 * Converts all of the information pertinent to this course's info into a single String to be stored in a external persistent file.
+	 * @return A String holding all of this course's information with the following format:<br>
+	 * name;credits;NRC;description
+	 */
+	public String persist() {
+		//Header: name;credits;nrc
+		String ret = "";
+		return ret += name+";"+credits+";"+NRC+";"+description;
+	}
+	
+	/**
+	 * Unenrolls a given student from this course.
+	 * @param s The given student to be unenrolled.
+	 */
+	public void unenroll(Student s) {
+		students.remove(s);		
+	}
+	
 	@Override
 	public String toString() {
 		return "Course [credits=" + credits + ", NRC=" + NRC + ", name=" + name + ", description=" + description + "]";
@@ -142,16 +161,5 @@ public class Course {
 	 */
 	public List<Student> getStudents(){
 		return students;
-	}
-	
-	/**
-	 * Converts all of the information pertinent to this course's info into a single String to be stored in a external persistent file.
-	 * @return A String holding all of this course's information with the following format:<br>
-	 * name;credits;NRC;description
-	 */
-	public String persist() {
-		//Header: name;credits;nrc
-		String ret = "";
-		return ret += name+";"+credits+";"+NRC+";"+description;
 	}
 }
