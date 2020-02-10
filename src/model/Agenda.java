@@ -169,11 +169,10 @@ public class Agenda {
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public Course searchCourseNrc(String nrc) throws Exception {
 		Course find=null;
 		for(int i=0; i<courses.size(); i++) {
-			if(nrc.equals(courses.get(i).getNRC())) {
+			if(Integer.parseInt(nrc) == courses.get(i).getNRC()) {
 				find=courses.get(i);
 			}
 		}
@@ -184,11 +183,10 @@ public class Agenda {
 		}
 	}
 	
-	@SuppressWarnings({ "unlikely-arg-type"})
 	public ArrayList<Course> searchCourseCredits(String c) throws Exception {
 		ArrayList<Course> find=new ArrayList<Course>();
 		for(int i=0; i<courses.size(); i++) {
-			if(c.equals(courses.get(i).getCredits())) {
+			if(Integer.parseInt(c) == (courses.get(i).getCredits())) {
 				find.add(courses.get(i));
 			}
 		}
@@ -253,4 +251,257 @@ public class Agenda {
 		@SuppressWarnings("unused")
 		Agenda agenda = new Agenda();
 	}
+	
+	void deleteLater() {
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+	}
+	
+	/** 
+	 * Removes a contact from the list given the index of the contact.
+	 * @param index The index of the contact to be deleted. Must be higher than 0 and lesser than <code>contacts.size()</code>
+	 */
+	public void deleteContact(int index) {
+		Student s = contacts.get(index);
+		s.unenroll();
+		contacts.remove(index);
+	}
+	
 }

@@ -151,4 +151,12 @@ public class Course {
 		String ret = "";
 		return ret += name+";"+credits+";"+NRC+";"+description;
 	}
+	
+	/**
+	 * Unenrolls a given student from this course.
+	 * @param s The given student to be unenrolled.
+	 */
+	public void unenroll(Student s) {
+		students.remove(s);
+	}
 }

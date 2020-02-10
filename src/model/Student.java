@@ -349,4 +349,13 @@ public class Student {
 		}
 		return ret;
 	}
+	
+	/**
+	 * Deletes this student from any course it has been enrolled before.
+	 */
+	public void unenroll() {
+		for(Course c : courses) {
+			c.unenroll(this);
+		}
+	}
 }
