@@ -38,7 +38,7 @@ public class MainScreenController {
 
     @FXML
     void addCourse(ActionEvent event) {
-
+    	
     }
 
     @FXML
