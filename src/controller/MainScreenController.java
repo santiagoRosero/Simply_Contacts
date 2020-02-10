@@ -74,11 +74,21 @@ public class MainScreenController {
 
     @FXML
     void addStudent() throws IOException {
-        loadStage("../view/EditContact.fxml", "New Contact");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/EditContact.fxml"));
+        Parent root = fxmlLoader.load();
+        EditContactController controller = fxmlLoader.getController();
+        controller.setStudent(null);
+        controller.setup(this);
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("New Contact");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    void deleteCurrentCourse() {
+    void deleteCurrentCourse() throws IOException {
         currentStudent.getCourses().remove(selectedCourse);
         loadStudent();
     }
@@ -166,7 +176,17 @@ public class MainScreenController {
 
     @FXML
     void openStudentSearchWindow() throws IOException {
-        loadStage("../view/SearchContact.fxml", "Search Contact");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SearchContactController.fxml"));
+        Parent root = fxmlLoader.load();
+        SearchContactController controller = fxmlLoader.getController();
+        controller.setStudent(currentStudent);
+        controller.setup(this);
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Search for Contact");
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void loadStage(String path, String title) throws IOException {
