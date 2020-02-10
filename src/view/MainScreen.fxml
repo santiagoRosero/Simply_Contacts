@@ -7,9 +7,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,8 +21,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#loadDatabase" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#unloadDatabase" text="Reset" />
+              <MenuItem mnemonicParsing="false" onAction="#loadReport" text="Generate Report" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -49,7 +48,7 @@
       <Separator prefWidth="200.0" />
       <HBox prefHeight="358.0" prefWidth="976.0">
          <children>
-            <HBox prefHeight="358.0" prefWidth="462.0" spacing="15.0">
+            <HBox prefHeight="358.0" prefWidth="462.0" spacing="20.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="333.0" prefWidth="181.0">
                      <children>
@@ -89,13 +88,16 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <TextArea fx:id="informationTA" prefHeight="214.0" prefWidth="224.0">
+                        <TextArea fx:id="informationTA" editable="false" prefHeight="214.0" prefWidth="224.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Comic Sans MS" size="14.0" />
+                           </font>
                         </TextArea>
                      </children>
                      <HBox.margin>
@@ -110,7 +112,7 @@
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <HBox prefHeight="358.0" prefWidth="526.0" spacing="15.0">
                <children>
-                  <VBox prefHeight="333.0" prefWidth="190.0">
+                  <VBox prefHeight="323.0" prefWidth="147.0">
                      <children>
                         <Label prefHeight="23.0" prefWidth="247.0" text="Courses / Credits">
                            <font>
@@ -123,21 +125,21 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <TreeTableView fx:id="coursesTTable" prefHeight="204.0" prefWidth="178.0">
+                        <TableView fx:id="coursesTV" prefHeight="205.0" prefWidth="147.0">
                           <columns>
-                            <TreeTableColumn fx:id="coursesTTColumn" prefWidth="75.0" text="Courses" />
-                            <TreeTableColumn fx:id="creditsTTColumn" prefWidth="75.0" text="Credits" />
+                            <TableColumn fx:id="coursesTVColumn" prefWidth="75.0" text="Course" />
+                            <TableColumn fx:id="creditsTVColumn" prefWidth="75.0" text="Credits" />
                           </columns>
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
-                        </TreeTableView>
+                        </TableView>
                         <Button mnemonicParsing="false" onAction="#editCourse" prefHeight="30.0" prefWidth="90.0" text="Edit">
                            <font>
                               <Font name="Comic Sans MS" size="14.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="35.0" top="20.0" />
+                              <Insets left="35.0" top="15.0" />
                            </VBox.margin>
                         </Button>
                      </children>
@@ -155,10 +157,13 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <TextArea fx:id="courseInfoTA" prefHeight="204.0" prefWidth="333.0">
+                        <TextArea fx:id="courseInfoTA" editable="false" prefHeight="204.0" prefWidth="333.0">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Comic Sans MS" size="14.0" />
+                           </font>
                         </TextArea>
                      </children>
                      <HBox.margin>

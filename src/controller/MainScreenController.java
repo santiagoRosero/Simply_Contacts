@@ -6,17 +6,25 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Agenda;
+import model.Course;
+import model.Student;
+
+import java.io.IOException;
 
 public class MainScreenController {
 
+    private Stage stage;
     private Agenda agenda;
+    private Student currentStudent;
+    private Course selectedCourse;
 
     {
         try {
@@ -29,6 +37,8 @@ public class MainScreenController {
     @FXML
     void initialize() {
         studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
+        currentStudent = null;
+        selectedCourse = null;
     }
 
     @FXML // fx:id="studentPhoto"
@@ -40,50 +50,62 @@ public class MainScreenController {
     @FXML // fx:id="informationTA"
     private TextArea informationTA; // Value injected by FXMLLoader
 
-    @FXML // fx:id="coursesTTable"
-    private TreeTableView<?> coursesTTable; // Value injected by FXMLLoader
+    @FXML // fx:id="coursesTV"
+    private TableView<?> coursesTV; // Value injected by FXMLLoader
 
-    @FXML // fx:id="coursesTTColumn"
-    private TreeTableColumn<?, ?> coursesTTColumn; // Value injected by FXMLLoader
+    @FXML // fx:id="coursesTVColumn"
+    private TableColumn<?, ?> coursesTVColumn; // Value injected by FXMLLoader
 
-    @FXML // fx:id="creditsTTColumn"
-    private TreeTableColumn<?, ?> creditsTTColumn; // Value injected by FXMLLoader
+    @FXML // fx:id="creditsTVColumn"
+    private TableColumn<?, ?> creditsTVColumn; // Value injected by FXMLLoader
 
     @FXML // fx:id="courseInfoTA"
     private TextArea courseInfoTA; // Value injected by FXMLLoader
 
     @FXML
-    void addCourse(ActionEvent event) {
-//        agenda
+    void addCourse() throws IOException {
+        loadStage("../view/EditCourse.fxml", "New Course");
     }
 
     @FXML
-    void addStudent(ActionEvent event) {
-
+    void addStudent() throws IOException {
+        loadStage("../view/EditContact.fxml", "New Contact");
     }
 
     @FXML
-    void deleteCurrentCourse(ActionEvent event) {
-
+    void deleteCurrentCourse() {
+        currentStudent.getCourses().remove(selectedCourse);
+        //TODO
     }
 
     @FXML
-    void deleteCurrentStudent(ActionEvent event) {
-
+    void deleteCurrentStudent() {
+        int indexOfStudent = agenda.getContacts().indexOf(currentStudent);
+        agenda.deleteContact(indexOfStudent);
+        //TODO
     }
 
     @FXML
-    void editCourse(ActionEvent event) {
-
+    void editCourse() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/EditCourse.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Course");
+        EditCourseController editCourseCtrl = fxmlLoader.getController();
+        editCourseCtrl.courseNameLabel.setText(coursesTV.getSelectionModel().getSelectedItem().toString());//TODO: check if works
+        editCourseCtrl.setStage(stage);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    void editStudent(ActionEvent event) {
-
+    void editStudent() throws IOException {
+        loadStage("../view/EditContact.fxml", "Edit Contact");
     }
 
     @FXML
-    void getNextStudent(ActionEvent event) {
+    void getNextStudent() {
 
     }
 
@@ -93,8 +115,8 @@ public class MainScreenController {
     }
 
     @FXML
-    void loadDatabase(ActionEvent event) {
-
+    void loadReport() throws IOException {
+        loadStage("../view/Report.fxml", "Report");
     }
 
     @FXML
@@ -107,9 +129,14 @@ public class MainScreenController {
 
     }
 
-    @FXML
-    void unloadDatabase(ActionEvent event) {
-
+    private void loadStage(String path, String title) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

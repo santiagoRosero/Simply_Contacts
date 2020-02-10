@@ -9,10 +9,13 @@ import java.io.IOException;
 
 public class Launcher extends Application {
 
+    public Parent root;
+    public Scene scene;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-        Scene scene = new Scene(root);
+        root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        scene = new Scene(root);
         primaryStage.setTitle("Simply Contacts");
         primaryStage.setScene(scene);
         primaryStage.show();

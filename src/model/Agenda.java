@@ -3,8 +3,6 @@ package model;
 import java.io.*;
 import java.util.*;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath.Step;
-
 import exceptions.ContactException;
 
 public class Agenda {

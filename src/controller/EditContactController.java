@@ -6,11 +6,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * Controller Class for the Edit Contact window.
  */
 public class EditContactController {
+
+    private Stage stage;
 
     @FXML // fx:id="contactNameLabel"
     private Label contactNameLabel; // Value injected by FXMLLoader
@@ -25,7 +28,7 @@ public class EditContactController {
     private TextField phoneTF; // Value injected by FXMLLoader
 
     @FXML // fx:id="careerCB"
-    private ComboBox<?> careerCB; // Value injected by FXMLLoader
+    private TextField careerTF; // Value injected by FXMLLoader
 
     @FXML // fx:id="emailTF"
     private TextField emailTF; // Value injected by FXMLLoader
@@ -55,5 +58,8 @@ public class EditContactController {
 
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }
 
