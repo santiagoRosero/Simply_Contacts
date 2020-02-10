@@ -113,7 +113,8 @@ public class MainScreenController {
         Parent root = fxmlLoader.load();
         EditContactController controller = fxmlLoader.getController();
         controller.setStudent(currentStudent);
-        controller.setup();
+        controller.setup(this);
+        controller.setAgenda(agenda);
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setTitle("Edit Contact");
@@ -195,7 +196,7 @@ public class MainScreenController {
     }
 
     @SuppressWarnings("unchecked")
-    private void loadStudent() {
+    public void loadStudent() {
         studentPhoto.setImage(new Image(currentStudent.getPictureURL()));
         studentLabel.setText(currentStudent.getName());
         String infoToAdd = "Name: ";
@@ -222,6 +223,12 @@ public class MainScreenController {
         creditsTVColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("credits"));
 
         coursesTV.setItems(observableCourses);
+    }
+
+
+    @FXML
+    void saveToDatabase() throws IOException {
+        agenda.outputContacts();
     }
 
 }
