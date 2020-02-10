@@ -231,21 +231,31 @@ public class Agenda {
 	public int assignedCoursesAverage() {
 		
 		int count = 0;
+		int n = 0;
 		
-		for(Student student : contacts)
-			count += student.getCourses().size();
+		for(Student student : contacts) {
+			if(student.getCourses().size() > 0) {
+				count += student.getCourses().size();
+				n ++;
+			}
+		}
 		
-		return (count / contacts.size());		
+		return (count / n);		
 	}
 	
 	public int assignedCreditsAverage() {
 		
 		int count = 0;
+		int n = 0;
 		
-		for(Student student : contacts)
-			count += student.creditsNumber();
+		for(Student student : contacts) {
+			if(student.getCredits()> 0) {
+				count += student.creditsNumber();
+				n++;
+			}
+		}
 		
-		return (count / contacts.size());		
+		return (count / n);		
 	}
 
 	public Course mostAssignedCourse() {
