@@ -15,17 +15,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import model.Agenda;
 import model.Course;
 import model.Student;
 
+import java.awt.Dialog;
 import java.io.IOException;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+
+import exceptions.ContactException;
 
 public class MainScreenController {
 
@@ -207,7 +214,64 @@ public class MainScreenController {
 
         coursesTV.setItems(observableCourses);
     }
+    
+    public void searchStudentName(String n) {
+    	try {
+			agenda.searchStudentName(n);
+		} catch (ContactException e) {
+			// TODO Auto-generated catch block
+			Alert dialog = new Alert(AlertType.ERROR);
+			dialog.setTitle("Not found");
+			dialog.setHeaderText(null);
+			dialog.setContentText(e.getMessage());
+			dialog.initStyle(StageStyle.UTILITY);
+			dialog.showAndWait();
+		}
+    }
+    
+    public void searchStudentCode(String c) {
+    	try {
+			agenda.searchStudentCode(c);
+		} catch (ContactException e) {
+			// TODO Auto-generated catch block
+			Alert dialog = new Alert(AlertType.ERROR);
+			dialog.setTitle("Not found");
+			dialog.setHeaderText(null);
+			dialog.setContentText(e.getMessage());
+			dialog.initStyle(StageStyle.UTILITY);
+			dialog.showAndWait();
+		}
+    }
 
+
+    public void searchStudentPhone(String p) {
+    	try {
+			agenda.searchStudentPhone(p);
+		} catch (ContactException e) {
+			// TODO Auto-generated catch block
+			Alert dialog = new Alert(AlertType.ERROR);
+			dialog.setTitle("Not found");
+			dialog.setHeaderText(null);
+			dialog.setContentText(e.getMessage());
+			dialog.initStyle(StageStyle.UTILITY);
+			dialog.showAndWait();
+		}
+    }
+    
+
+    public void searchStudentEmail(String em) {
+    	try {
+			agenda.searchStudentEmail(em);
+		} catch (ContactException e) {
+			// TODO Auto-generated catch block
+			Alert dialog = new Alert(AlertType.ERROR);
+			dialog.setTitle("Not found");
+			dialog.setHeaderText(null);
+			dialog.setContentText(e.getMessage());
+			dialog.initStyle(StageStyle.UTILITY);
+			dialog.showAndWait();
+		}
+    }
 }
 
 
