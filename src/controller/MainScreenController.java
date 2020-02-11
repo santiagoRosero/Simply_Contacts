@@ -4,12 +4,8 @@ package controller;
  * Controller Class for the Main Screen window.
  */
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,10 +15,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import model.Agenda;
 import model.Course;
 import model.Student;
@@ -52,9 +46,11 @@ public class MainScreenController {
     @FXML
     void initialize() {
         studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
-        currentStudent = agenda.getContacts().get(0);
-        selectedCourse = null;
-        loadStudent();
+        if (!agenda.getContacts().isEmpty()) {
+            currentStudent = agenda.getContacts().get(0);
+            selectedCourse = null;
+            loadStudent();
+        }
     }
 
     @FXML // fx:id="studentPhoto"
@@ -85,11 +81,21 @@ public class MainScreenController {
 
     @FXML
     void addStudent() throws IOException {
-        loadStage("../view/EditContact.fxml", "New Contact");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/EditContact.fxml"));
+        Parent root = fxmlLoader.load();
+        EditContactController controller = fxmlLoader.getController();
+        controller.setStudent(null);
+        controller.setup(this);
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("New Contact");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    void deleteCurrentCourse() {
+    void deleteCurrentCourse() throws IOException {
         currentStudent.getCourses().remove(selectedCourse);
         loadStudent();
     }
@@ -97,8 +103,13 @@ public class MainScreenController {
     @FXML
     void deleteCurrentStudent() {
         int indexOfStudent = agenda.getContacts().indexOf(currentStudent);
+        if (indexOfStudent == agenda.getContacts().size() - 1) {
+            currentStudent = agenda.getContacts().get(0);
+        } else {
+            currentStudent = agenda.getContacts().get(indexOfStudent + 1);
+        }
         agenda.deleteContact(indexOfStudent);
-        //TODO
+        loadStudent();
     }
 
     @FXML
@@ -117,7 +128,17 @@ public class MainScreenController {
 
     @FXML
     void editStudent() throws IOException {
-        loadStage("../view/EditContact.fxml", "Edit Contact");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/EditContact.fxml"));
+        Parent root = fxmlLoader.load();
+        EditContactController controller = fxmlLoader.getController();
+        controller.setStudent(currentStudent);
+        controller.setup(this);
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Edit Contact");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -144,7 +165,15 @@ public class MainScreenController {
 
     @FXML
     void loadReport() throws IOException {
-        loadStage("../view/Report.fxml", "Report");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/Report.fxml"));
+        Parent root = fxmlLoader.load();
+        ReportController controller = fxmlLoader.getController();
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Report");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -154,7 +183,17 @@ public class MainScreenController {
 
     @FXML
     void openStudentSearchWindow() throws IOException {
-        loadStage("../view/SearchContact.fxml", "Search Contact");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/SearchContact.fxml"));
+        Parent root = fxmlLoader.load();
+        SearchContactController controller = fxmlLoader.getController();
+        controller.setStudent(currentStudent);
+        controller.setup(this);
+        controller.setAgenda(agenda);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setTitle("Search for Contact");
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void loadStage(String path, String title) throws IOException {
@@ -170,24 +209,31 @@ public class MainScreenController {
 
     @FXML
     void showSelectedCourseInfo() {
-        selectedCourse = coursesTV.getSelectionModel().getSelectedItem();
-        String infoToAdd = "Course Name: ";
-        infoToAdd += selectedCourse.getName() + "\n";
-        infoToAdd += "Credits: ";
-        infoToAdd += selectedCourse.getCredits() + "\n";
-        infoToAdd += "NRC: ";
-        infoToAdd += selectedCourse.getNRC() + "\n\n";
-        infoToAdd += "Enrolled Students: " + "\n";
-        for (Student student : selectedCourse.getStudents()
-        ) {
-            infoToAdd += student.getName() + "\n";
+        if (coursesTV.getSelectionModel().getSelectedItem() != null) {
+            selectedCourse = coursesTV.getSelectionModel().getSelectedItem();
+            String infoToAdd = "Course Name: ";
+            infoToAdd += selectedCourse.getName() + "\n";
+            infoToAdd += "Credits: ";
+            infoToAdd += selectedCourse.getCredits() + "\n";
+            infoToAdd += "NRC: ";
+            infoToAdd += selectedCourse.getNRC() + "\n\n";
+            infoToAdd += "Enrolled Students: " + "\n";
+            for (Student student : selectedCourse.getStudents()
+            ) {
+                infoToAdd += student.getName() + "\n";
+            }
+            courseInfoTA.setText(infoToAdd);
         }
-        courseInfoTA.setText(infoToAdd);
+
     }
 
     @SuppressWarnings("unchecked")
-    private void loadStudent() {
-        studentPhoto.setImage(new Image(currentStudent.getPictureURL()));
+    public void loadStudent() {
+        if (!currentStudent.getPictureURL().equals(" ")) {
+            studentPhoto.setImage(new Image(currentStudent.getPictureURL()));
+        } else {
+            studentPhoto.setImage(new Image("https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"));
+        }
         studentLabel.setText(currentStudent.getName());
         String infoToAdd = "Name: ";
         infoToAdd += currentStudent.getName() + "\n";
@@ -206,6 +252,8 @@ public class MainScreenController {
         informationTA.setText(infoToAdd);
 
         coursesTV.getColumns().clear();
+        coursesTVColumn.getColumns().clear();
+        creditsTVColumn.getColumns().clear();
         coursesTV.getColumns().addAll(coursesTVColumn, creditsTVColumn);
         ObservableList<Course> observableCourses = FXCollections.observableArrayList();
         observableCourses.addAll(currentStudent.getCourses());
@@ -244,6 +292,7 @@ public class MainScreenController {
     }
 
 
+
     public void searchStudentPhone(String p) {
     	try {
 			agenda.searchStudentPhone(p);
@@ -271,6 +320,15 @@ public class MainScreenController {
 			dialog.initStyle(StageStyle.UTILITY);
 			dialog.showAndWait();
 		}
+    }
+		
+    @FXML
+    void saveToDatabase() throws IOException {
+        agenda.outputContacts();
+    }
+
+    public void setCurrentStudent(Student currentStudent) {
+        this.currentStudent = currentStudent;
     }
 }
 
