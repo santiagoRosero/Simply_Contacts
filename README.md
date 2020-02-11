@@ -18,6 +18,7 @@ información de los datos ya existentes y modificar y agregar materias nuevas a 
 En cuánto a la estructura del programa, este esta estructurado de la siguiente forma:
 
 **src**
+
      *Controller*
          editContactController.java
          EditCourseController.java
@@ -25,12 +26,15 @@ En cuánto a la estructura del programa, este esta estructurado de la siguiente 
          ReportController.java
          searchContactController.java
          searchCourseCOntroller.java
+         
      *exceptions*
          ContactException.java
-     model
+         
+     *model*
          Agenda.java
          Course.java
          Student.java
+         
      *view*
          Launcher.java
          EditContact.fxml
@@ -39,10 +43,13 @@ En cuánto a la estructura del programa, este esta estructurado de la siguiente 
          Report.fxml
          SearchContact.fxml
          SearchCourse.fxml
+         
 **Data**
+
      *Backup*
          courses.csv
          Students.csv
+         
      *Pictures*
          Balanta.jpg
          Mora.png
@@ -50,11 +57,15 @@ En cuánto a la estructura del programa, este esta estructurado de la siguiente 
      Courses.csv
      Estudiantes.xlsxl
      Students.csv
+     
 **Documentation**
+
      *GUIMockups*
+     
           EditContactGUIMockUp.png
           EditCourseGUIMockUp-png
           MainScreenGUIMockUp.png
+          
      ClassDiagram.dia
      DiseñoCasosPriebasUnitarias.pdf
      RequerimientosFuncionales.pdf
