@@ -71,3 +71,13 @@ En cuánto a la estructura del programa, este esta estructurado de la siguiente 
      RequerimientosFuncionales.pdf
      SeguimientoAlMétodoDeLaIngenieria.pdf
      Simply_ContactDiagramClass.png
+
+Autores:
+
+Juan David Vera.
+
+Gabriel Cruz.
+
+Jhon Mora.
+
+Santiago Rosero.
